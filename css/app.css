@@ -1,38 +1,124 @@
-.ms-grid {
-  display: inline-block;
-  border: 1px solid #ccc;
+/**
+ *  Site header
+ */
+
+header {
+  background-color: #f5f5f5;
+}
+
+header h1 {
+  margin: 0;
+  padding: 19px 10px;
+  font-size: 25px;
+  line-height: 25px;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #f5f5f5;
+}
+
+/**
+ *  Minesweeper
+ */
+
+.ms {
+  padding-bottom: 60px;
+}
+
+/**
+ *  Minesweeper grid
+ */
+
+.ms-grid {}
+
+.ms-grid-row {
+  margin: 0 auto;
 }
 
 .ms-grid-cell {
   float: left;
   width: 50px;
   height: 50px;
+}
+
+.ms-grid-cell button {
+  width: 48px;
+  height: 48px;
   border: 1px solid #ccc;
   font-size: 20px;
   font-weight: bold;
-  line-height: 50px;
+  line-height: 48px;
   text-align: center;
+  border-radius: 2px;
 }
 
-.ms-x-grid-cell-open.ms-x-grid-cell-abovezero,
-.ms-x-grid-cell-open.ms-x-grid-cell-zero {
-  background-color: #f5f5f5;
-  background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
-  background-repeat: repeat-x;
+.ms-grid-cell button {
+  padding: 0;
 }
 
-.ms-x-grid-cell-closed {
+/**
+ *  Minesweeper state display
+ */
+
+.ms-state {
+  margin: 0 auto;
+  padding: 15px 0 0;
+}
+
+.ms-state .input-group-addon {
+  font-weight: bold;
+}
+
+.ms-state input[readonly] {
   background-color: white;
+  text-align: center;
+  font-weight: bold;
 }
 
-.ms-x-grid-cell-mine {
-  background-color: red;
+.ms-state-exclamations,
+.ms-state-time {
+  width: 150px;
 }
+
+.ms-state-exclamations {
+  float: left;
+}
+
+.ms-state-time {
+  float: right;
+}
+
+/**
+ *  Minesweeper options
+ */
+
+ .ms-options {
+  margin: 0 auto;
+  padding: 15px 0;
+ }
+
+ .ms-options .dropdown {
+  float: left;
+ }
+
+ .ms-options-new {
+  float: right;
+ }
+
+ .ms-options-custom {
+  float: left;
+  padding-top: 15px;
+ }
 
 /**
  *  clearfix
  *  credit: https://css-tricks.com/snippets/css/clear-fix/
  */
+
 .group:after {
   content: "";
   display: table;
