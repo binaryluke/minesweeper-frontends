@@ -3,22 +3,53 @@
  */
 
 header {
-  background-color: #f5f5f5;
+  position: relative;
 }
 
-header h1 {
-  margin: 0;
-  padding: 19px 10px;
-  font-size: 25px;
-  line-height: 25px;
+header .page-header {
+  margin-top: 0;
+  padding-top: 40px;
 }
+
+header .page-header h1 {
+  margin-top: 0;
+  font-size: 28px;
+  padding-left: 10px;
+}
+
+/**
+ *  Site footer
+ */
 
 footer {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
+  z-index: 100;
+  padding: 10px;
   background-color: #f5f5f5;
+  font-weight: bold;
+}
+
+footer .author-details,
+footer .author-social {
+  line-height: 30px;
+}
+
+footer .author-details {
+  float: left;
+}
+
+footer .author-details .twitter-wrap {
+  display: inline-block;
+  position: relative;
+  top: 5px;
+  height: 20px;
+}
+
+footer .author-social {
+  float: right;
 }
 
 /**
@@ -26,18 +57,18 @@ footer {
  */
 
 .ms {
-  padding-bottom: 60px;
+  padding: 60px 0;
 }
 
 /**
  *  Minesweeper grid
  */
 
-.ms-grid {}
-
-.ms-grid-row {
+.ms-grid {
   margin: 0 auto;
 }
+
+.ms-grid-row {}
 
 .ms-grid-cell {
   float: left;
@@ -92,27 +123,60 @@ footer {
   float: right;
 }
 
+.ms-state-winlose {
+  text-align: center;
+  font-size: 16px;
+  line-height: 36px;
+  font-weight: bold;
+}
+
+.ms-state-winlose-won {
+  color: #3e8f3e;
+}
+
+.ms-state-winlose-lost {
+  color: #b92c28;
+}
+
 /**
  *  Minesweeper options
  */
 
- .ms-options {
+.ms-options {
   margin: 0 auto;
   padding: 15px 0;
- }
+}
 
- .ms-options .dropdown {
+.ms-options .dropdown {
   float: left;
- }
+}
 
- .ms-options-new {
+.ms-options-new {
   float: right;
- }
+}
 
- .ms-options-custom {
+.ms-options-custom {
   float: left;
   padding-top: 15px;
- }
+}
+
+.ms-options-custom-fields input {
+  background-color: white;
+  text-align: center;
+}
+
+.ms-options-custom-warn {
+  padding: 10px 0 15px 0;
+}
+
+.ms-options-custom-warn > div {
+  display: none;
+}
+
+.ms-options-custom-warn > div > span:nth-of-type(1) {
+  font-weight: bold;
+  color: #b92c28;
+}
 
 /**
  *  clearfix

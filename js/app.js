@@ -12,33 +12,64 @@
   var CELL_HEIGHT = 48;
   var CELL_BORDER_WIDTH = 1;
   var GRID_BORDER_WIDTH = 1;
+  var MIN_ROWS = 10;
+  var MAX_ROWS = 30;
+  var MIN_COLS = 10;
+  var MAX_COLS = 30;
 
   var board, timeElapsed = 0;
 
   var printBoard = function () {
     var i,
         isWonLost = false,
-        grid = board.grid();
+        grid = board.grid(),
+        div = $('.ms-grid'),
+        width;
 
+    // no need to redraw the board if WON or LOST as the state and cells 
+    //   of the board are frozen at that point
     if (board.state === BoardStateEnum.WON || board.state === BoardStateEnum.LOST) {
       isWonLost = true;
     }
 
-    $('.ms-grid').empty();
-    $('.ms-grid').on('contextmenu', function () { return false; });
+    // clean up any cells from existing board
+    //   to ensure they can be garbage collected
+    div.off('contextmenu');
+    div.find('.ms-grid-cell').off('mousedown');
 
+    // empty existing dom elements from previous draw
+    //   in preparation for redraw
+    div.empty();
+    div.on('contextmenu', function () { return false; });
+
+    // redraw the board
     for (i=0; i<board.numRows(); i++) {
       printRow(grid[i], isWonLost, i);
     }
 
+    // update the state and option displays
     updateState();
     updateOptions();
+
+    // make sure the body is large enough to contain the grid
+    width = $(div.find('.ms-grid-row').get(0)).width();
+    div.width(width);
+    $('body').css('min-width', width);
   };
 
   var updateState = function () {
+    var stateHtml = '';
+
+    if (board.state() === BoardStateEnum.WON) {
+      stateHtml += '<span class="ms-state-winlose-won">YOU WON</span>';
+    } else if (board.state() === BoardStateEnum.LOST) {
+      stateHtml += '<span class="ms-state-winlose-lost">YOU LOST</span>';
+    }
+
     $('.ms-state').css('width', getRowWidth());
     $('.ms-state-exclamations input').val(getNumExclamations());
     $('.ms-state-time input').val(timeElapsed || 0);
+    $('.ms-state-winlose').html(stateHtml);
   };
 
   var updateOptions = function () {
@@ -129,25 +160,6 @@
     return div;
   };
 
-  var printState = function () {
-    if (board.state() === BoardStateEnum.PRISTINE) {
-      $('.ms-state').empty();
-      $('.ms-state').append('<span>PRISTINE</span>');
-    } else if (board.state() === BoardStateEnum.IN_PROGRESS) {
-      $('.ms-state').empty();
-      $('.ms-state').append('<span>IN_PROGRESS</span>');
-    } else if (board.state() === BoardStateEnum.WON) {
-      $('.ms-state').empty();
-      $('.ms-state').append('<span>WON</span>');
-    } else if (board.state() === BoardStateEnum.LOST) {
-      $('.ms-state').empty();
-      $('.ms-state').append('<span>LOST</span>');
-    } else {
-      $('.ms-state').empty();
-      $('.ms-state').append('<span>UNKNOWN</span>');
-    }
-  };
-
   var onclickCell = function (e) {
     var xy = $(this).data('xy').split(',');
     var x = xy[0];
@@ -198,13 +210,12 @@
   };
 
   var updateDifficulty = function (difficulty) {
-    var params, rows, cols, mines;
+    var params, rows, cols, mines, isPreset = true;
     
     if (difficulty === 'easy') {
       rows = 10;
       cols = 10;
       mines = 15;
-
     } else if (difficulty === 'medium') {
       rows = 15;
       cols = 15;
@@ -213,6 +224,8 @@
       rows = 20;
       cols = 20;
       mines = 80;
+    } else {
+      isPreset = false;
     }
     
     params = {
@@ -222,16 +235,77 @@
     };
 
     setNewGameParams(params);
+
+    if (isPreset) {
+      $('.ms-options-custom-fields input').attr('readonly', true);
+    } else {
+      $('.ms-options-custom-fields input').removeAttr('readonly');
+    }
+
+    updateOptionErrorsDisplay();
+  };
+
+  var getOptionErrors = function () {
+    var params = getNewGameParams(), errors = [];
+
+    if (params.rows < MIN_ROWS || params.cols < MIN_COLS) {
+      errors.push('cells-toofew');
+    }
+
+    if (params.rows > MAX_ROWS || params.cols > MAX_COLS) {
+      errors.push('cells-toomany');
+    }
+
+    if (params.rows <= 0 || params.cols <= 0) {
+      errors.push('cells-zero');
+    }
+
+    if (params.mines > params.rows * params.cols) {
+      errors.push('mines-toomany');
+    }
+
+    if (params.mines <= 0) {
+      errors.push('mines-toofew');
+    }
+
+    if (!$.isNumeric(params.rows) || !$.isNumeric(params.cols) || !$.isNumeric(params.mines)) {
+      errors.push('all-nonsense');
+    }
+
+    return errors;
+  };
+
+  var updateOptionErrorsDisplay = function () {
+    var errors = getOptionErrors();
+    var container = $('.ms-options-custom-warn');
+
+    container.find('> div').hide();
+    container.hide();
+
+    if (errors.length) {
+      $('.ms-options-custom .input-group').addClass('has-error');
+      container.show();
+    } else {
+      $('.ms-options-custom .input-group').removeClass('has-error');
+      container.hide();
+    }
+
+    $.each(errors, function (idx, error) {
+      container.find('[data-errorname="' + error + '"]').show();
+    });
   };
 
   var onclickNewGame = function () {
-    var params = getNewGameParams();
-    var mineArray = generateMineArray(params);
+    var params, mineArray, errors;
 
-    // clean up any cells from existing board
-    $('.ms-grid-cell').off('mousedown');
+    params = getNewGameParams();
+    errors = getOptionErrors(params);
+
+    updateOptionErrorsDisplay(errors);
+    if (errors.length) return;
 
     timeElapsed = 0;
+    mineArray = generateMineArray(params);
     board = new Board(mineArray);
     printBoard();
   };
@@ -253,6 +327,4 @@
   onclickNewGame();
 
   window.setInterval(onintervalOneSec, 1000);
-
-  
 }());

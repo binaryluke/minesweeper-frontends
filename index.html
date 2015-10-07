@@ -7,11 +7,14 @@
   <title>Minesweeper - jQuery Edition</title>
   <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
   <link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
+  <link rel="stylesheet" type="text/css" href="bower_components/fontawesome/css/font-awesome.css">
   <link rel="stylesheet" type="text/css" href="css/app.css">
 </head>
 <body>
   <header>
-    <div><h1>Minesweeper: jQuery Edition</h1></div>
+    <div class="page-header">
+      <h1>Minesweeper <small>jQuery Edition</small></h1>
+    </div>
     <div>
       <a href="https://github.com/binaryluke/Minesweeper" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
     </div>
@@ -35,20 +38,25 @@
         <button class="btn btn-success">New Game</button>  
       </div>
       <div class="ms-options-custom">
-        <div class="ms-options-warn">
-          <div data-errorname="cells-toomany"><strong>Warning! </strong>That many rows and columns might just cause the universe to implode. Keep the rows and columns to less than 50, yeah?</div>
-          <div data-errorname="cells-toofew"><strong>Warning! </strong>You realise it doesn't make much sense to play on a board with 0 cells, yeah?</div>
-          <div data-errorname="mines-toomany"><strong>Warning! </strong>You realise that's more mines than there are cells, yeah?</div>
-          <div data-errorname="mines-toofew"><strong>Warning! </strong>You wanted to one-shot the board, yeah? Caught you red handed!</div>
-          <div data-errorname="all-nonsense"><strong>Warning! </strong>I don't get your meaning, try again!</div>
+        <div class="ms-options-custom-warn">
+          <div data-errorname="cells-toomany"><span>Warning! </span><span>That many rows and columns might just cause the universe to implode. Keep the rows and columns to less than 30, yeah?<span></div>
+          <div data-errorname="cells-toofew"><span>Warning! </span><span>We'd all like things to be that easy, but the world doesn't work that way.  Keep the</span> rows and columns at or above 10, yeah?</div>
+          <div data-errorname="cells-zero"><span>Warning! </span><span>You realise it doesn't make much sense to play on a board with 0 cells, yeah?</span></div>
+          <div data-errorname="mines-toomany"><span>Warning! </span><span>You realise that's more mines than there are cells, yeah?</span></div>
+          <div data-errorname="mines-toofew"><span>Warning! </span><span>You wanted to one-shot the board, yeah? Caught you red handed!</span></div>
+          <div data-errorname="all-nonsense"><span>Warning! </span><span>I don't get your meaning, try again!</span></div>
         </div>
-        <label for="ms-options-rows">Rows</label><input name="ms-options-rows" class="ms-options-rows">
-        <label for="ms-options-cols">Columns</label><input name="ms-options-rows" class="ms-options-cols">
-        <label for="ms-options-mines">Mines</label><input name="ms-options-rows" class="ms-options-mines">
+        <div class="ms-options-custom-fields">
+          <div class="input-group">
+            <span class="input-group-addon">Rows</span><input type="number" class="ms-options-rows form-control" name="ms-options-rows" min="0" max="30" step="1" readonly>
+            <span class="input-group-addon">Columns</span><input type="number" class="ms-options-cols form-control" name="ms-options-rows" min="0" max="30" step="1" readonly>
+            <span class="input-group-addon">Mines</span><input type="number" class="ms-options-mines form-control" name="ms-options-rows" min="0" max="50" step="1" readonly>
+          </div>
+        </div>
       </div>
     </div>
     <div class="ms-grid"></div>
-    <div class="ms-state">
+    <div class="ms-state group">
       <div class="ms-state-exclamations">
         <div class="input-group">  
           <span class="input-group-addon"><span class="glyphicon glyphicon-exclamation-sign"></span></span>
@@ -61,11 +69,19 @@
           <input class="form-control" readonly>
         </div>
       </div>
+      <div class="ms-state-winlose"></div>
     </div>
   </div>
-  <footer>
-    <div><span>by Luke Howard | Visit <a href="http://lukehoward.name" target="_blank">lukehoward.name</a> to find more about me</span></div>
-    <div><span>Social Icons</span></div>
+  <footer class="group">
+    <div class="author-details">
+      <span>Luke Howard | <a href="http://lukehoward.name" target="_blank">hire me</a> | <div class="twitter-wrap"><a href="https://twitter.com/binaryluke" class="twitter-follow-button" data-show-count="false">Follow @binaryluke</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></div></span>
+    </div>
+    <div class="author-social">
+      <a href="mailto:hireme@binaryluke.com"><i class="fa fa-envelope-o"></i></a>&nbsp;
+      <a target="_blank" href="https://twitter.com/binaryluke"><i class="fa fa-twitter"></i></a>&nbsp;
+      <a target="_blank" href="https://au.linkedin.com/in/lukehoward"><i class="fa fa-linkedin"></i></a>&nbsp;
+      <a target="_blank" href="https://github.com/binaryluke"><i class="fa fa-github"></i></a>
+    </div>
   </footer>
   <script src="bower_components/jquery/dist/jquery.min.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
