@@ -1,0 +1,33 @@
+<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="difficultyDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+    Difficulty
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" aria-labelledby="difficultyDropdown">
+    <li data-text="Easy" data-difficulty="easy">Easy</li>
+    <li data-text="Medium" data-difficulty="medium">Medium</li>
+    <li data-text="Hard" data-difficulty="hard">Hard</li>
+    <li role="separator" class="divider"></li>
+    <li data-text="Custom" data-difficulty="custom">Custom</li>
+  </ul>
+</div>
+<div class="ms-new-new">
+  <button class="btn btn-success">New Game</button>  
+</div>
+<div class="ms-new-custom">
+  <div class="ms-new-custom-warn">
+    <div data-errorname="cells-toomany"><span>Warning! </span><span>That many rows and columns might just cause the universe to implode. Keep the rows and columns to less than 30, yeah?<span></div>
+    <div data-errorname="cells-toofew"><span>Warning! </span><span>We\'d all like things to be that easy, but the world doesn\'t work that way.  Keep the</span> rows and columns at or above 10, yeah?</div>
+    <div data-errorname="cells-zero"><span>Warning! </span><span>You realise it doesn\'t make much sense to play on a board with 0 cells, yeah?</span></div>
+    <div data-errorname="mines-toomany"><span>Warning! </span><span>You realise that\'s more mines than there are cells, yeah?</span></div>
+    <div data-errorname="mines-toofew"><span>Warning! </span><span>You wanted to one-shot the board, yeah? Caught you red handed!</span></div>
+    <div data-errorname="all-nonsense"><span>Warning! </span><span>I don\'t get your meaning, try again!</span></div>
+  </div>
+  <div class="ms-new-custom-fields">
+    <div class="input-group">
+      <span class="input-group-addon">Rows</span><input type="number" class="ms-new-rows form-control" name="ms-new-rows" min="0" max="30" step="1" readonly>
+      <span class="input-group-addon">Columns</span><input type="number" class="ms-new-cols form-control" name="ms-new-rows" min="0" max="30" step="1" readonly>
+      <span class="input-group-addon">Mines</span><input type="number" class="ms-new-mines form-control" name="ms-new-rows" min="0" max="50" step="1" readonly>
+    </div>
+  </div>
+</div>

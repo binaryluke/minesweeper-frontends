@@ -1,0 +1,20 @@
+/*!
+ * Minesweeper frontends
+ * https://github.com/binaryluke/minesweeper-frontends.git
+ *
+ * Copyright 2015, Luke Howard (@binaryluke)
+ *
+ * Released under the MIT license
+ * http://lukehoward.name/project/minesweeper/license
+ */
+
+/**
+ *  clearfix
+ *  credit: https://css-tricks.com/snippets/css/clear-fix/
+ */
+
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
+}

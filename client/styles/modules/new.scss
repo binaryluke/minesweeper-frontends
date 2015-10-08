@@ -1,0 +1,39 @@
+/**
+ *  Minesweeper newgame options
+ */
+
+.ms-new {
+  margin: 0 auto;
+  padding: 15px 0;
+}
+
+.ms-new .dropdown {
+  float: left;
+}
+
+.ms-new-new {
+  float: right;
+}
+
+.ms-new-custom {
+  float: left;
+  padding-top: 15px;
+}
+
+.ms-new-custom-fields input {
+  background-color: white;
+  text-align: center;
+}
+
+.ms-new-custom-warn {
+  padding: 10px 0 15px 0;
+}
+
+.ms-new-custom-warn > div {
+  display: none;
+}
+
+.ms-new-custom-warn > div > span:nth-of-type(1) {
+  font-weight: bold;
+  color: #b92c28;
+}
