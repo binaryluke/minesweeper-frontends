@@ -26,8 +26,8 @@ var template = require('../templates/editions/jquery/app.html');
  *  Constants
  */
 
-var CELL_WIDTH = 48;
-var CELL_HEIGHT = 48;
+var CELL_WIDTH = 50;
+var CELL_HEIGHT = 50;
 var CELL_BORDER_WIDTH = 0;
 var GRID_BORDER_WIDTH = 0;
 
