@@ -5,12 +5,14 @@
   "description": "",
   "author": "Luke Howard <binaryluke@gmail.com>",
   "license": "MIT",
-  "repository" : { 
-    "type" : "git",
-    "url" : "https://github.com/binaryluke/minesweeper-frontends.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/binaryluke/minesweeper-frontends.git"
   },
   "dependencies": {
+    "angular": "^1.4.7",
     "bootstrap": "^3.3.5",
+    "deep-extend": "^0.4.0",
     "font-awesome": "^4.4.0",
     "jquery": "^2.1.4",
     "minesweeper": "^1.0.4"

@@ -139,7 +139,7 @@ var getOptionErrors = function (container) {
 };
 
 var updateOptionErrorsDisplay = function (container) {
-  var errors = getOptionErrors();
+  var errors = getOptionErrors(container);
   var div = $(container).find('.ms-new-custom-warn');
 
   div.find('> div').hide();

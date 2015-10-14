@@ -1,3 +1,4 @@
+var fs = require('fs');
 var browserify = require('browserify');
 var stringify = require('stringify');
 var gulp = require('gulp');
@@ -14,8 +15,6 @@ var buffer = require('vinyl-buffer');
 var through = require('through');
 
 var scriptBuilder = function (edition) {
-  // debug = true gives us sourcemaps, which can be
-  //   excluded when pushing to production
   var bundler = browserify({debug: true});
 
   bundler.transform(stringify(['.html']));
@@ -69,13 +68,18 @@ var styleBuilder = function (edition) {
 
 var htmlBuilder = function (edition) {
   var friendlyName = edition;
+  var templateFile = './client/templates/editions/' + edition + '/ms.html';
+  var templateContents = fs.readFileSync(templateFile);
 
   if (edition === 'jquery') {
     friendlyName = 'jQuery';
+  } else if (edition === 'angular') {
+    friendlyName = 'Angular';
   }
 
   return gulp.src('./client/templates/index.html')
     .pipe(replace('!!!EDITION!!!', friendlyName))
+    .pipe(replace('!!!MS!!!', templateContents))
     .pipe(gulp.dest('./public/' + edition + '/'));
 };
 
@@ -97,7 +101,15 @@ gulp.task('build-jquery', ['lint'], function () {
   fontAwesomeBuilder('jquery');
 });
 
-gulp.task('build', ['build-jquery']);
+gulp.task('build-angular', ['lint'], function () {
+  scriptBuilder('angular');
+  styleBuilder('angular');
+  htmlBuilder('angular');
+  glyphiconsBuilder('angular');
+  fontAwesomeBuilder('angular');
+});
+
+gulp.task('build', ['build-jquery', 'build-angular']);
 
 gulp.task('lint', function() {
   return gulp.src('./client/scripts/**/*.js')

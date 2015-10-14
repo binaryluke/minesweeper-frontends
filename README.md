@@ -4,7 +4,7 @@ Frontends in various frameworks for the [Minesweeper library](https://github.com
 
 ## Demos
 
-You can see a live demo running at [lukehoward.name/project/minesweeper/jquery](http://lukehoward.name/project/minesweeper/jquery).
+You can see a live demo of the [Angular Edition](http://lukehoward.name/project/minesweeper/angular) and [jQuery Edition](http://lukehoward.name/project/minesweeper/jquery).
 
 ## Learn
 

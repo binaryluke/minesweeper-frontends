@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head lang="en">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Minesweeper - Angular Edition</title>
+  <link rel="stylesheet" type="text/css" href="styles/app.css">
+</head>
+<body>
+  <header>
+    <div class="page-header">
+      <h1>Minesweeper <small>Angular Edition</small></h1>
+    </div>
+    <div>
+      <a href="https://github.com/binaryluke/minesweeper-frontends.git" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
+    </div>
+  </header>
+  <div ng-app="ms" class="ms" ng-style="{ width: (appCtrl.width() + appCtrl.appPaddingWidth * 2) + 'px' }" ng-controller="AppController as appCtrl">
+  <!-- START: new game widget -->
+  <div class="ms-new group" ng-style="{ width: appCtrl.width() + 'px' }" ng-controller="NewController as newCtrl">
+    <form name="form" ng-submit="newCtrl.onsubmit()" novalidate>
+      <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="difficultyDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          {{newCtrl.difficulty}}
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="difficultyDropdown">
+          <li data-difficulty="Easy" ng-click="newCtrl.updateDifficulty('Easy')">Easy</li>
+          <li data-difficulty="Medium" ng-click="newCtrl.updateDifficulty('Medium')">Medium</li>
+          <li data-difficulty="Hard" ng-click="newCtrl.updateDifficulty('Hard')">Hard</li>
+          <li role="separator" class="divider"></li>
+          <li data-difficulty="Custom" ng-click="newCtrl.updateDifficulty('Custom')">Custom</li>
+        </ul>
+      </div>
+      <div class="ms-new-new">
+        <input type="submit" class="btn btn-success" value="New Game">
+      </div>
+      <div class="ms-new-custom">
+        <div class="ms-new-custom-warn" ng-show="form.$submitted && form.$invalid">
+          <div ng-show="form.rows.$error.max || form.cols.$error.max"><span>Warning! </span><span>That many rows and columns might just cause the universe to implode. Keep the rows and columns to less than 30, yeah?</span></div>
+          <div ng-show="form.rows.$error.min || form.cols.$error.min"><span>Warning! </span><span>We'd all like things to be that easy, but the world doesn't work that way.  Keep the</span> rows and columns at or above 10, yeah?</div>
+          <div ng-show="form.mines.$error.max"><span>Warning! </span><span>You realise that's more mines than there are cells, yeah?</span></div>
+          <div ng-show="form.mines.$error.min"><span>Warning! </span><span>You wanted to one-shot the board, yeah? Caught you red handed!</span></div>
+          <div ng-show="form.rows.$error.integer || form.cols.$error.integer || form.mines.$error.integer"><span>Warning! </span><span>I don't get your meaning, try again!</span></div>
+        </div>
+        <div class="ms-new-custom-fields">
+          <div class="input-group">
+            <span class="input-group-addon">Rows</span><input type="number" class="ms-new-rows form-control" name="rows" min="10" max="30" step="1" ng-model="newCtrl.rows" ng-readonly="newCtrl.difficulty !== 'Custom'">
+            <span class="input-group-addon">Columns</span><input type="number" class="ms-new-cols form-control" name="cols" min="10" max="30" step="1" ng-model="newCtrl.cols" ng-readonly="newCtrl.difficulty !== 'Custom'">
+            <span class="input-group-addon">Mines</span><input type="number" class="ms-new-mines form-control" name="mines" min="1" max="{{newCtrl.rows * newCtrl.cols}}" step="1" ng-model="newCtrl.mines" ng-readonly="newCtrl.difficulty !== 'Custom'">
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <!-- END: new game widget -->
+  <!-- START: grid widget -->
+  <div class="ms-grid" ng-style="{ width: appCtrl.width() + 'px' }" ng-controller="BoardController as boardCtrl">
+    <div class="ms-grid-row group" ng-repeat="row in boardCtrl.grid">
+      <div ng-class="boardCtrl.cellClass(cell)" ng-repeat="cell in row">
+        <button ng-class="boardCtrl.buttonClass(cell)" ng-click="boardCtrl.openCell(cell)" ng-right-click="boardCtrl.flagCell(cell)">
+          {{ boardCtrl.content(cell) }}
+        </button>
+      </div>
+    </div>
+  </div>
+  <!-- END: grid widget -->
+  <!-- START: state widget -->
+  <div class="ms-state" ng-style="{ width: appCtrl.width() + 'px' }" ng-controller="StateController as stateCtrl">
+    <div class="ms-state-exclamations">
+      <div class="input-group">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-exclamation-sign"></span></span>
+        <input class="form-control" ng-value="stateCtrl.exclamations()" readonly>
+      </div>
+    </div>
+    <div class="ms-state-time">
+      <div class="input-group">
+        <span class="input-group-addon"><span class="glyphicon glyphicon-time"></span></span>
+        <input class="form-control" ng-value="stateCtrl.time" readonly>
+      </div>
+    </div>
+    <div class="ms-state-winlose">
+      <span class="ms-state-winlose-won" ng-show="stateCtrl.isWon()">YOU WON</span>
+      <span class="ms-state-winlose-lost" ng-show="stateCtrl.isLost()">YOU LOST</span>
+    </div>
+  </div>
+  <!-- END: state widget -->
+</div>  
+  <footer class="group">
+    <div class="author-details">
+      <span>Luke Howard | <a href="http://lukehoward.name" target="_blank">hire me</a> | <div class="twitter-wrap"><a href="https://twitter.com/binaryluke" class="twitter-follow-button" data-show-count="false">Follow @binaryluke</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script></div></span>
+    </div>
+    <div class="author-social">
+      <a href="mailto:hireme@binaryluke.com"><i class="fa fa-envelope-o"></i></a>&nbsp;
+      <a target="_blank" href="https://twitter.com/binaryluke"><i class="fa fa-twitter"></i></a>&nbsp;
+      <a target="_blank" href="https://au.linkedin.com/in/lukehoward"><i class="fa fa-linkedin"></i></a>&nbsp;
+      <a target="_blank" href="https://github.com/binaryluke"><i class="fa fa-github"></i></a>
+    </div>
+  </footer>
+  <script src="scripts/app.js"></script>
+</body>
+</html>

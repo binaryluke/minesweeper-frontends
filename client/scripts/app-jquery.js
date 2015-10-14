@@ -28,8 +28,8 @@ var template = require('../templates/editions/jquery/app.html');
 
 var CELL_WIDTH = 48;
 var CELL_HEIGHT = 48;
-var CELL_BORDER_WIDTH = 1;
-var GRID_BORDER_WIDTH = 1;
+var CELL_BORDER_WIDTH = 0;
+var GRID_BORDER_WIDTH = 0;
 
 /**
  *  Aliases
@@ -46,7 +46,7 @@ var generateMineArray = minesweeper.generateMineArray;
  *  Module variables
  */
  
-var board, timeElapsed = 0, container = $('.app-container');
+var board, timeElapsed = 0, container = $('.ms');
 
 var render = function () {
   var i,
