@@ -31,8 +31,10 @@ app.factory('game', [
 app.directive('integer',
   require('./editions/angular/directives/integer'));
 
-app.directive('ngRightClick',
-  require('./editions/angular/directives/ng-right-click'));
+app.directive('rightclick', [
+  '$parse',
+  require('./editions/angular/directives/rightclick')
+]);
 
 /**
  *  Controllers

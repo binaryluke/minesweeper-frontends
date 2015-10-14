@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Minesweeper - Angular Edition</title>
-  <link rel="stylesheet" type="text/css" href="styles/app.css">
+  <link rel="stylesheet" type="text/css" href="styles/app.min.css">
 </head>
 <body>
   <header>
@@ -59,7 +59,7 @@
   <div class="ms-grid" ng-style="{ width: appCtrl.width() + 'px' }" ng-controller="BoardController as boardCtrl">
     <div class="ms-grid-row group" ng-repeat="row in boardCtrl.grid">
       <div ng-class="boardCtrl.cellClass(cell)" ng-repeat="cell in row">
-        <button ng-class="boardCtrl.buttonClass(cell)" ng-click="boardCtrl.openCell(cell)" ng-right-click="boardCtrl.flagCell(cell)">
+        <button ng-class="boardCtrl.buttonClass(cell)" ng-click="boardCtrl.openCell(cell)" rightclick="boardCtrl.flagCell(cell)">
           {{ boardCtrl.content(cell) }}
         </button>
       </div>
@@ -98,6 +98,6 @@
       <a target="_blank" href="https://github.com/binaryluke"><i class="fa fa-github"></i></a>
     </div>
   </footer>
-  <script src="scripts/app.js"></script>
+  <script src="scripts/app.min.js"></script>
 </body>
 </html>

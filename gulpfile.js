@@ -39,7 +39,7 @@ var scriptBuilder = function (edition) {
 
   return bundler
     .bundle()
-    .pipe(source('app.js'))
+    .pipe(source('app.min.js'))
     .pipe(buffer())
     .pipe(sourcemaps.init({loadMaps: true, debug: true}))
       .pipe(uglify())
@@ -61,7 +61,7 @@ var styleBuilder = function (edition) {
       .pipe(sass())
       .pipe(prefix("> 5%"))
       .pipe(minifyCss())
-      .pipe(concat('app.css'))
+      .pipe(concat('app.min.css'))
     .pipe(sourcemaps.write('./'))
     .pipe(gulp.dest('./public/' + edition + '/styles'))
 };

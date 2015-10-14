@@ -25,4 +25,4 @@ header{position:relative}header .page-header{margin-top:0;padding-top:40px}heade
 .ms-grid{margin:0 auto}.ms-grid-cell{float:left;width:50px;height:50px}.ms-grid-cell button{width:48px;height:48px;border:1px solid #ccc;font-size:20px;font-weight:700;line-height:48px;text-align:center;border-radius:2px;padding:0}
 .ms-new{margin:0 auto;padding:15px 0}.ms-new .dropdown{float:left}.ms-new-new{float:right}.ms-new-custom{float:left;padding-top:15px}.ms-new-custom-fields input{background-color:#fff;text-align:center}.ms-new-custom-warn{padding:10px 0 15px}.ms-new--hidden{display:none}.ms-new-custom-warn>div>span:nth-of-type(1){font-weight:700;color:#b92c28}
 .ms-state{margin:0 auto;padding:15px 0 0}.ms-state .input-group-addon{font-weight:700}.ms-state input[readonly]{background-color:#fff;text-align:center;font-weight:700}.ms-state-exclamations,.ms-state-time{width:150px}.ms-state-exclamations{float:left}.ms-state-time{float:right}.ms-state-winlose{text-align:center;font-size:16px;line-height:36px;font-weight:700}.ms-state-winlose-won{color:#3e8f3e}.ms-state-winlose-lost{color:#b92c28}
-/*# sourceMappingURL=app.css.map */
+/*# sourceMappingURL=app.min.css.map */

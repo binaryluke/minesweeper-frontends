@@ -2,7 +2,7 @@
 
 module.exports = function ($parse) {
   return function(scope, element, attrs) {
-    var fn = $parse(attrs.ngRightClick);
+    var fn = $parse(attrs.rightclick);
     element.bind('contextmenu', function(event) {
       scope.$apply(function() {
         event.preventDefault();

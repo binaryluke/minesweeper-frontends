@@ -1,6 +1,6 @@
 # Minesweeper frontends
 
-Frontends in various frameworks for the [Minesweeper library](https://github.com/binaryluke/Minesweeper), which I also wrote. They have been written as coding samples, and as an easy way to experiement with emerging frameworks.
+Frontends in various frameworks for the [Minesweeper library](https://github.com/binaryluke/Minesweeper), which I also wrote. They have been written as coding samples, and as an easy way to experiment with emerging frameworks.
 
 ## Demos
 

@@ -41,7 +41,7 @@
   <div class="ms-grid" ng-style="{ width: appCtrl.width() + 'px' }" ng-controller="BoardController as boardCtrl">
     <div class="ms-grid-row group" ng-repeat="row in boardCtrl.grid">
       <div ng-class="boardCtrl.cellClass(cell)" ng-repeat="cell in row">
-        <button ng-class="boardCtrl.buttonClass(cell)" ng-click="boardCtrl.openCell(cell)" ng-right-click="boardCtrl.flagCell(cell)">
+        <button ng-class="boardCtrl.buttonClass(cell)" ng-click="boardCtrl.openCell(cell)" rightclick="boardCtrl.flagCell(cell)">
           {{ boardCtrl.content(cell) }}
         </button>
       </div>
