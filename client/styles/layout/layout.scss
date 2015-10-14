@@ -17,6 +17,12 @@ header .page-header h1 {
   padding-left: 10px;
 }
 
+@media (max-width: 480px) {
+  header .page-forkme {
+    display: none;
+  }
+}
+
 /**
  *  Site footer
  */
@@ -50,6 +56,14 @@ footer .author-details .twitter-wrap {
 
 footer .author-social {
   float: right;
+}
+
+@media (max-width: 480px) {
+  footer .author-social,
+  footer .author-details {
+    float: none;
+    text-align: center;
+  }
 }
 
 /**
