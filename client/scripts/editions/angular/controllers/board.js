@@ -58,15 +58,15 @@ module.exports = function ($rootScope, game) {
       }
     }
 
-    this.openCell = function (cell) {
-      game.openCell(cell.x, cell.y);
-    };
-
-    this.flagCell = function (cell) {
-      game.flagCell(cell.x, cell.y);
-    };
-
     return content;
+  };
+
+  this.openCell = function (cell) {
+    game.openCell(cell.x, cell.y);
+  };
+
+  this.flagCell = function (cell) {
+    game.flagCell(cell.x, cell.y);
   };
 
   $rootScope.$on('game:new', function () {
