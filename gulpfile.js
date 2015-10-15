@@ -1,9 +1,10 @@
 var fs = require('fs');
 var browserify = require('browserify');
+var babel = require('babelify');
 var stringify = require('stringify');
 var gulp = require('gulp');
 var concat = require('gulp-concat');
-var jshint = require('gulp-jshint');
+var eslint = require('gulp-eslint');
 var replace = require('gulp-replace');
 var uglify = require('gulp-uglify');
 var prefix = require('gulp-autoprefixer');
@@ -18,6 +19,7 @@ var scriptBuilder = function (edition) {
   var bundler = browserify({debug: true});
 
   bundler.transform(stringify(['.html']));
+  bundler.transform(babel);
 
   bundler.transform(function(file) {
     if (file.indexOf('bootstrap') === -1) {
@@ -75,6 +77,8 @@ var htmlBuilder = function (edition) {
     friendlyName = 'jQuery';
   } else if (edition === 'angular') {
     friendlyName = 'Angular';
+  } else if (edition === 'react') {
+    friendlyName = 'React';
   }
 
   return gulp.src('./client/templates/index.html')
@@ -109,12 +113,21 @@ gulp.task('build-angular', ['lint'], function () {
   fontAwesomeBuilder('angular');
 });
 
-gulp.task('build', ['build-jquery', 'build-angular']);
+gulp.task('build-react', ['lint'], function () {
+  scriptBuilder('react');
+  styleBuilder('react');
+  htmlBuilder('react');
+  glyphiconsBuilder('react');
+  fontAwesomeBuilder('react');
+});
+
+gulp.task('build', ['build-jquery', 'build-angular', 'build-react']);
 
 gulp.task('lint', function() {
   return gulp.src('./client/scripts/**/*.js')
-    .pipe(jshint())
-    .pipe(jshint.reporter('default'));
+    .pipe(eslint({jsx: true}))
+    .pipe(eslint.format())
+    .pipe(eslint.failOnError());
 });
 
 gulp.task('default', ['build']);

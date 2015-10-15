@@ -15,14 +15,17 @@
     "deep-extend": "^0.4.0",
     "font-awesome": "^4.4.0",
     "jquery": "^2.1.4",
-    "minesweeper": "^1.0.4"
+    "minesweeper": "^1.0.4",
+    "react": "^0.14.0",
+    "react-dom": "^0.14.0"
   },
   "devDependencies": {
+    "babelify": "^6.3.0",
     "browserify": "^11.2.0",
     "gulp": "^3.9.0",
     "gulp-autoprefixer": "^3.0.2",
     "gulp-concat": "^2.6.0",
-    "gulp-jshint": "^1.11.2",
+    "gulp-eslint": "^1.0.0",
     "gulp-minify-css": "^1.2.1",
     "gulp-replace": "^0.5.4",
     "gulp-sass": "^2.0.4",
