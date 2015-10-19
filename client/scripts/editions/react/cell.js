@@ -7,26 +7,19 @@ var CellStateEnum = ms.CellStateEnum;
 var CellFlagEnum = ms.CellFlagEnum;
 
 module.exports = React.createClass({
-  getInitialState: function () {
-    var cell = this.props.board.cell(this.props.colIdx, this.props.rowIdx);
-    return {cell: cell};
+  handleClick: function () {
+    var cell = this.props.cell;
+    this.props.openCell(cell.x, cell.y);
   },
 
-  componentDidMount: function () {
-    this.intervalHandle = setInterval(this.getUpdatedCell, 200);
-  },
-
-  componentWillUnmount: function () {
-    clearInterval(this.intervalHandle);
-  },
-
-  getUpdatedCell: function () {
-    var cell = this.props.board.cell(this.props.colIdx, this.props.rowIdx);
-    this.setState({cell: cell});
+  handleRightClick: function (e) {
+    var cell = this.props.cell;
+    e.preventDefault();
+    this.props.flagCell(cell.x, cell.y);
   },
 
   divClasses: function () {
-    var cell = this.state.cell,
+    var cell = this.props.cell,
         classes = ['ms-grid-cell'],
         isOpen = cell.state === CellStateEnum.OPEN;
 
@@ -40,7 +33,7 @@ module.exports = React.createClass({
   },
 
   btnClasses: function () {
-    var cell = this.state.cell,
+    var cell = this.props.cell,
         classes = ['btn'],
         isOpen = cell.state === CellStateEnum.OPEN;
 
@@ -54,7 +47,7 @@ module.exports = React.createClass({
   },
 
   content: function () {
-    var cell = this.state.cell,
+    var cell = this.props.cell,
         content = '',
         isOpen = cell.state === CellStateEnum.OPEN;
 
@@ -80,7 +73,9 @@ module.exports = React.createClass({
   render: function () {
     return (
       <div className={this.divClasses()}>
-        <button className={this.btnClasses()}>
+        <button className={this.btnClasses()}
+                onClick={this.handleClick}
+                onContextMenu={this.handleRightClick}>
           {this.content()}
         </button>
       </div>

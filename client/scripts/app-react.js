@@ -10,25 +10,12 @@
 
 'use script';
 
-var ms = require('minesweeper');
 var bootstrap = require('bootstrap');
 var React = require('react');
 var ReactDOM = require('react-dom');
-var Board = require('./editions/react/board');
+var Minesweeper = require('./editions/react/minesweeper');
 
-window.newGame = function (options) {
-  var mineArray = ms.generateMineArray(options);
-  var board = new ms.Board(mineArray);
-  var div = document.querySelector('.app-container');
-
-  ReactDOM.unmountComponentAtNode(div);
-
-  ReactDOM.render(
-    <Board numRows={board.numRows()}
-           numCols={board.numCols()}
-           board={board} />,
-    div
-  );
-
-  window.board = board;
-};
+ReactDOM.render(
+  <Minesweeper />,
+  document.querySelector('.app-container')
+);

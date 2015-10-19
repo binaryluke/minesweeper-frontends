@@ -4,23 +4,22 @@ var React = require('react');
 var Cell = require('./cell');
 
 module.exports = React.createClass({
-  getInitialState: function () {
-    var i, cells = [];
-
-    for (i = 0; i < this.props.numCols; i++) {
-      cells.push(<Cell rowIdx={this.props.rowIdx}
-                       colIdx={i}
-                       board={this.props.board} />
-      );
-    }
-
-    return {cells: cells};
-  },
-
   render: function () {
+    var that = this;
+
+    var getCells = function () {
+      return that.props.cells.map(function (cell) {
+        return (
+          <Cell cell={cell}
+                openCell={that.props.openCell}
+                flagCell={that.props.flagCell} />
+        );
+      });
+    };
+
     return (
       <div className="ms-grid-row group">
-        {this.state.cells}
+        {getCells()}
       </div>
     );
   }
