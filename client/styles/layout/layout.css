@@ -58,6 +58,10 @@ footer .author-social {
   float: right;
 }
 
+footer .author-details a:hover {
+  text-decoration: none;
+}
+
 @media (max-width: 480px) {
   footer .author-social,
   footer .author-details {

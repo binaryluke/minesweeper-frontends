@@ -41,6 +41,7 @@ module.exports = React.createClass({
       classes.push('btn-danger');
     } else if (isOpen) {
       classes.push('btn-default');
+      classes.push('cell-open-btn')
     }
 
     return classes.join(' ');

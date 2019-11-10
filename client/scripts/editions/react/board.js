@@ -9,15 +9,16 @@ module.exports = React.createClass({
     var that = this;
 
     var getRows = function () {
-      return that.props.grid.map(function (row) {
+      return that.props.grid.map(function (row, idx) {
         return (
-          <Row cells={row} 
+          <Row key={idx}
+               cells={row}
                openCell={that.props.openCell}
                flagCell={that.props.flagCell} />
         );
       });
     };
-    
+
     return (
       <div className="ms-grid">
         {getRows()}

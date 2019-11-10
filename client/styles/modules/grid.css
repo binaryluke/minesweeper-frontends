@@ -28,3 +28,7 @@
 .ms-grid-cell button {
   padding: 0;
 }
+
+.ms-grid-cell button.cell-open-btn {
+  background-color: #eee;
+}

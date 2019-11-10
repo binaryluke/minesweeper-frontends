@@ -8,9 +8,10 @@ module.exports = React.createClass({
     var that = this;
 
     var getCells = function () {
-      return that.props.cells.map(function (cell) {
+      return that.props.cells.map(function (cell, idx) {
         return (
-          <Cell cell={cell}
+          <Cell key={idx}
+                cell={cell}
                 openCell={that.props.openCell}
                 flagCell={that.props.flagCell} />
         );
